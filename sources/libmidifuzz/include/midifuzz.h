@@ -75,7 +75,7 @@ void midifuzz_set_channel(midifuzz_t *mf, int channel);
 void midifuzz_set_rate_limit(midifuzz_t *mf, double limit);
 
 /**
-   Processes a cycle of the MIDI fuzzer, with given duration in seconds.
+   Processes a cycle of the MIDI fuzzer, with given duration in frames.
  */
 void midifuzz_process(midifuzz_t *mf, uint32_t nframes);
 
