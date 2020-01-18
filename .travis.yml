@@ -1,0 +1,28 @@
+language: c++
+
+branches:
+  except:
+    - automatic
+
+cache:
+  directories:
+    - download
+
+addons:
+  apt:
+    packages:
+    - cmake
+    - lv2-dev
+
+matrix:
+  include:
+    - os: linux
+      dist: xenial
+      env:
+        - _BITS=64
+        - _BUILD=linux64
+      script:
+        - mkdir build
+        - cd build
+        - cmake -DCMAKE_BUILD_TYPE=Release ..
+        - cmake --build .
