@@ -1,12 +1,12 @@
 #include "midifuzz.h"
 #include "midifuzz_forge_write.h"
 #include <lv2/lv2plug.in/ns/lv2core/lv2.h>
-#include <lv2/lv2plug.in/ns/lv2core/lv2_util.h>
 #include <lv2/lv2plug.in/ns/ext/atom/atom.h>
 #include <lv2/lv2plug.in/ns/ext/atom/forge.h>
 #include <lv2/lv2plug.in/ns/ext/urid/urid.h>
 #include <lv2/lv2plug.in/ns/ext/midi/midi.h>
 #include <stdlib.h>
+#include <string.h>
 #include <assert.h>
 
 typedef struct LV2_midifuzz {
@@ -46,13 +46,14 @@ instantiate(const LV2_Descriptor *descriptor,
     effect->mf = NULL;
     effect->sample_rate = sample_rate;
     effect->events = NULL;
+    effect->map = NULL;
 
-    const char *missing = lv2_features_query(
-        features,
-        LV2_URID__map, &effect->map, true,
-        NULL);
+    for (const LV2_Feature *const *featp = features; *featp; ++featp) {
+        if (!strcmp((*featp)->URI, LV2_URID__map))
+            effect->map = (LV2_URID_Map *)(*featp)->data;
+    }
 
-    if (missing) {
+    if (!effect->map) {
         free(effect);
         return NULL;
     }
