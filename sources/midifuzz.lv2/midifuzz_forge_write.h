@@ -1,6 +1,6 @@
 #pragma once
-#include <lv2/atom/atom.h>
-#include <lv2/atom/forge.h>
+#include <lv2/lv2plug.in/ns/ext/atom/atom.h>
+#include <lv2/lv2plug.in/ns/ext/atom/forge.h>
 
 typedef struct mf_forge {
     LV2_Atom_Forge *forge;
