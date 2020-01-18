@@ -74,7 +74,7 @@ void midifuzz_process(midifuzz_t *mf, uint32_t nframes)
 
             for (int k = 0; k < mf_kind_count; ++k) {
                 if (mf->kindmask.test(k) ||
-                    (k == mfk_notes && mf->countNoteOn == 0))
+                    (k == mfk_notes && mf->countNoteOn > 0))
                     // permit note cleanup even if notes disabled
                 {
                     kindsAvailable[numKindsAvailable++] = k;
