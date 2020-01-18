@@ -233,6 +233,7 @@ static bool midifuzz_send_message(midifuzz_t *mf, int kind, const uint8_t *data,
             ++(mf->countNoteOn);
         }
         else if (isNoteOff && *noteSlot > 0) {
+            assert(mf->countNoteOn > 0);
             --(*noteSlot);
             --(mf->countNoteOn);
         }

@@ -34,7 +34,7 @@ struct midifuzz {
     std::bitset<mf_kind_count> kindmask;
     std::minstd_rand prng;
     unsigned countNoteOn = 0; // total note-on count over all channels
-    uint8_t notesOn[16 * 128]; // number of note-on sent per note number
+    uint8_t notesOn[16 * 128] = {}; // number of note-on sent per note number
 };
 
 static int midifuzz_dummy_write(void *, int, const uint8_t *, uint32_t)
